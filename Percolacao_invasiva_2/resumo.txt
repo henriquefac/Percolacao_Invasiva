@@ -1,5 +1,0 @@
-criar classe matriz para:
-    gerar dados a serem percolados
-    implementar com uma heap binária minima associada
-
-criar classe coms os métodos de percolacao

@@ -16,6 +16,12 @@ class Matriz_lis(Matriz_base):
         self.conj = set()
         self.qunt = 0
     
+    def reset(self):
+        super().reset()
+        self.root = None
+        self.conj = set()
+        self.qunt = 0
+
     # adicionar elemento a lista encadeada
     def insert(self, key):
         node = Node(key)

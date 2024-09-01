@@ -74,7 +74,7 @@ class Matriz_bi(Matriz_base):
     
     def escolher_vizinho(self):
         escolha = self.extract_min()
-        self.matriz[escolha] -= 1
+        self.matriz[escolha] = -1
         return escolha
     
     def conjunto_invadido(self):
