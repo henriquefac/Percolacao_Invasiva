@@ -24,7 +24,7 @@ class Graph:
 
 
         plt.figure(figsize=(10, 6))
-        plt.errorbar(tamanhos, tempos, yerr=erros_padrao, fmt='o', ecolor='red', capsize=5, label='Erro Padrão')
+        plt.errorbar(tamanhos, tempos, yerr=erros_padrao, fmt='-', ecolor='red', capsize=5, label='Erro Padrão')
         plt.xlabel('Tamanho da Rede (L)')
         plt.ylabel('Tempo Médio de Execução (s)')
         plt.title('Tempo Médio de Execução por Tamanho da Rede com Erro Padrão')
@@ -61,7 +61,6 @@ class Graph:
     @staticmethod
     def mean(matriz: Matriz_base, n: int):
         lista_exe = []
-        print(n)
         for _ in range(n):
             lista_exe.append(Graph.get_time(matriz))
             matriz.reset()
@@ -74,10 +73,16 @@ class Graph:
         init_time = time.time()
         pi.start(matriz)
         end_time = time.time()
-        return (end_time - init_time)*100
+        return (end_time - init_time)
     
+    @staticmethod
     def plot_mult_graphs(l_inicial: int, l_fim: int, passo: int, *classes):
-        plt.figure(figsize=(10, 6))  # Mova a criação da figura para fora do loop
+        plt.figure(figsize=(20, 12))  # Mova a criação da figura para fora do loop
+        dict_names = {
+            "Matriz_bi":"Heap Binária",
+            "Matriz_fibo":"Heap de Fibonacci",
+            "Matriz_lis":"Lista de prioridade"
+        }
         for matriz in classes:
             if not issubclass(matriz, Matriz_base):
                 raise TypeError(f"A classe fornecida {matriz.__name__} não herda de Matriz_base.")
@@ -87,7 +92,7 @@ class Graph:
             tamanhos = list(dict_v.keys())
             tempos = [np.mean(tempos) for tempos in dict_v.values()]
 
-            plt.errorbar(tamanhos, tempos, yerr=erros_padrao, fmt='-', ecolor='red', capsize=5, label=matriz.__name__)
+            plt.errorbar(tamanhos, tempos, yerr=erros_padrao, fmt='-', ecolor='red', capsize=5, label=dict_names[matriz.__name__])
         
         plt.xlabel('Tamanho da Rede (L)')
         plt.ylabel('Tempo Médio de Execução (s)')
