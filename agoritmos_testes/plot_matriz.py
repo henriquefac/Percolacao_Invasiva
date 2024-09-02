@@ -15,17 +15,16 @@ class PlotMatriz():
     @staticmethod
     def _plot(matriz: Matriz_base):
         # Ajustar valores da matriz conforme necessário
-            for i in matriz.borda:
-                matriz.matriz[i] = 2
+
 
             # Defina o colormap base e adicione as cores
             base_cmap = cm.get_cmap('viridis')  # Colormap base
 
             # Defina as cores adicionais
-            colors = ['blue'] + [base_cmap(i) for i in range(base_cmap.N)] + ['red']
+            colors = ['black'] + ['gray']
             new_cmap = mcolors.LinearSegmentedColormap.from_list('custom_cmap', colors)
 
-            norm = mcolors.Normalize(vmin=-1, vmax=2)
+            norm = mcolors.Normalize(vmin=-1, vmax=0)
 
             # Exiba a matriz
             plt.matshow(matriz.matriz.reshape(matriz.nox, matriz.nox), cmap=new_cmap, norm=norm)
